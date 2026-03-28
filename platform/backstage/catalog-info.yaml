@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: enterprise-ai-platform-operating-model
+  description: Day 1 reference architecture for a secure multi-cluster AI platform.
+  annotations:
+    github.com/project-slug: your-org/enterprise-ai-platform-operating-model
+spec:
+  type: platform
+  owner: platform-engineering
+  lifecycle: experimental

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-inference-config
+data:
+  APP_ENV: base
+  METRICS_PATH: /metrics
+  MODEL_NAME: lightweight-demo-model

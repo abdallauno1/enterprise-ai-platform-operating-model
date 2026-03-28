@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Validate Kustomize overlays
+        run: |
+          kubectl kustomize examples/sample-service/overlays/dev > /tmp/dev.yaml
+          kubectl kustomize examples/sample-service/overlays/staging > /tmp/staging.yaml
+          kubectl kustomize examples/sample-service/overlays/prod > /tmp/prod.yaml
+
+      - name: YAML sanity check
+        run: |
+          test -s /tmp/dev.yaml
+          test -s /tmp/staging.yaml
+          test -s /tmp/prod.yaml
+
+  day2-placeholders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Supply chain roadmap
+        run: |
+          echo "Future extension: kubeconform, Trivy, Syft SBOM"

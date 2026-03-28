@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workloads-us
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/enterprise-ai-platform-operating-model.git
+    targetRevision: main
+    path: examples/sample-service/overlays/staging
+  destination:
+    name: us-cluster
+    namespace: team-b-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

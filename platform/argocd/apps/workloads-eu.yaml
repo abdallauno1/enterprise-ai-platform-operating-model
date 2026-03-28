@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workloads-eu
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/enterprise-ai-platform-operating-model.git
+    targetRevision: main
+    path: examples/sample-service/overlays/dev
+  destination:
+    name: eu-cluster
+    namespace: team-a-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-inference
+  labels:
+    app.kubernetes.io/name: sample-inference
+    app.kubernetes.io/part-of: enterprise-ai-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sample-inference
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sample-inference
+        app.kubernetes.io/part-of: enterprise-ai-platform
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/your-org/sample-inference:v0.1.0
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: sample-inference-config
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
