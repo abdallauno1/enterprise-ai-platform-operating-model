@@ -1,10 +1,15 @@
+# Day 2 — Golden Path & Secure Delivery
+
+This diagram represents the production-grade service delivery flow for the Enterprise AI Platform.
+
+```mermaid
 flowchart LR
 
 A[Developer] --> B[Pull Request]
-B --> C[CI Validation]
+B --> C[CI Pipeline]
 
-C --> D[kubeconform]
-C --> E[Trivy Scan]
+C --> D[Kubernetes Validation]
+C --> E[Security Scan]
 C --> F[SBOM Generation]
 
 D --> G[Merge to main]
@@ -15,5 +20,5 @@ G --> H[GitOps Repository]
 H --> I[Argo CD Sync]
 I --> J[Kubernetes Cluster]
 
-J --> K[Kyverno Policy Enforcement]
+J --> K[Policy Enforcement]
 J --> L[Observability]
