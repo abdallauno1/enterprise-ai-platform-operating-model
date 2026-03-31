@@ -9,6 +9,22 @@ This repository is intentionally structured as a **reference architecture + impl
 - governance-ready tenancy
 - secure platform evolution toward Day 2 and Day 3
 
+## Progress
+
+- Day 1: Platform Foundation
+- Day 2: Golden Path & Secure Delivery
+- Day 3: Governance, Multi-Tenancy & Resilience
+
+
+## Highlights
+
+- Multi-cluster Kubernetes operating model
+- GitOps delivery with Argo CD
+- Policy-as-Code governance with Kyverno
+- Namespace-based multi-tenancy
+- Disaster recovery workflow with Velero
+- AI platform reference architecture
+
 ## Scope
 
 ### Day 1 (included and ready)

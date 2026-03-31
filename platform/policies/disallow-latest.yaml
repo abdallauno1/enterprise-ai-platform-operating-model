@@ -3,17 +3,16 @@ kind: ClusterPolicy
 metadata:
   name: disallow-latest-tag
 spec:
-  validationFailureAction: Audit
-  background: true
+  validationFailureAction: Enforce
   rules:
-    - name: require-non-latest-tag
+    - name: validate-image-tag
       match:
         any:
           - resources:
               kinds:
                 - Pod
       validate:
-        message: "Using the latest tag is discouraged."
+        message: "Using the ':latest' tag is not allowed."
         pattern:
           spec:
             containers:

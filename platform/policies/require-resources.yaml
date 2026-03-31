@@ -1,24 +1,21 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: require-resources
+  name: require-standard-labels
 spec:
-  validationFailureAction: enforce
+  validationFailureAction: Enforce
   rules:
-    - name: validate-resources
+    - name: check-labels
       match:
-        resources:
-          kinds:
-            - Pod
+        any:
+          - resources:
+              kinds:
+                - Deployment
+                - Service
       validate:
-        message: "CPU and memory requests/limits are required"
+        message: "app and owner labels are required."
         pattern:
-          spec:
-            containers:
-              - resources:
-                  requests:
-                    memory: "?*"
-                    cpu: "?*"
-                  limits:
-                    memory: "?*"
-                    cpu: "?*"
+          metadata:
+            labels:
+              app: "?*"
+              owner: "?*"
